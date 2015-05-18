@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 from scaffold.boot import fix_path
+
 fix_path()
 
 import os
@@ -17,7 +18,5 @@ from djangae.utils import on_production
 
 settings = "scaffold.settings_live" if on_production() else "scaffold.settings"
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings)
-
-
 
 application = DjangaeApplication(get_wsgi_application())

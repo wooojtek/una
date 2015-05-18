@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="post">
+    <h1><a>{{ object.title }}</a></h1>
+    <span class="meta small">
+      created {% if user.is_authenticated %}by
+      {{ object.owner.email }}
+    {% endif %}
+      on {{ object.created }}
+
+    </span>
+
+    <div class="panel">
+      <p>
+        {{ object.body }}
+      </p>
+    </div>
+  </div>
+
+  {% if user.email == object.owner.email %}
+    <a class="btn btn-primary btn-sm" href="{% url 'entry-edit' slug=object.slug %}">
+      <span class="glyphicon glyphicon-pencil"> edit</span></a>
+
+    <a class="btn btn-warning btn-sm" href="{% url 'entry-delete' pk=object.pk %}">
+      <span class="glyphicon glyphicon-trash"> delete</span></a>
+  {% endif %}
+
+{% endblock %}

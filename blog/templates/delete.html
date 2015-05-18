@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p>Are you sure you want to delete?<strong>"{{ object.title }}"</strong>?</p>
+
+        <form class="pure-form pure-form-stacked" method='post'>
+          {% csrf_token %}
+          <a class="btn btn-success btn-sm" href={% url 'list' %}>NO</a>
+
+          <input class="btn btn-danger btn-sm" type='submit' value='OK'/>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Blog</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'list' %}">Blog</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="{% url 'list' %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+          <li>
+            <a href="{% url "entry-new" %}">Create</a>
+          </li>
+          <li class='dropdown'>
+            <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              {{ user.email }}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation">
+                <a href="{% url "logout" %}" role="menuitem" tabindex="-1">
+                                        <span class="glyphicon glyphicon-off">
+                                            Logout
+                                        </span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% url "login" %}">Login</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  <!-- /.container -->
+</nav>
+<!-- Main Content -->
+<div class="container">
+  <div class="row ">
+    <div class="col-lg-8 p">
+      {% block content %}
+      {% endblock %}
+      <!-- Pager -->
+    </div>
+  </div>
+</div>
+<hr>
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <p class="text-center text-muted">Una test</p>
+    </div>
+  </div>
+</footer>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
