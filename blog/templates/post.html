@@ -5,7 +5,7 @@
   <div class="post">
     <h1><a>{{ object.title }}</a></h1>
     <span class="meta small">
-      created {% if user.is_authenticated %}by
+      {% if user.is_authenticated %}
       {{ object.owner.email }}
     {% endif %}
       on {{ object.created }}
@@ -20,11 +20,8 @@
   </div>
 
   {% if user.email == object.owner.email %}
-    <a class="btn btn-primary btn-sm" href="{% url 'entry-edit' slug=object.slug %}">
-      <span class="glyphicon glyphicon-pencil"> edit</span></a>
-
-    <a class="btn btn-warning btn-sm" href="{% url 'entry-delete' pk=object.pk %}">
-      <span class="glyphicon glyphicon-trash"> delete</span></a>
+    <a class="btn btn-primary btn-sm" href="{% url 'entry-edit' slug=object.slug %}"> Update</a>
+    <a class="btn btn-default btn-sm" href="{% url 'entry-delete' pk=object.pk %}"> Delete</a>
   {% endif %}
 
 {% endblock %}
